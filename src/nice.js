@@ -29,6 +29,9 @@
         this.isFn = function (arg) {
             return typeof arg === 'function';
         };
+        this.isArray = function(a) {
+            return $.isArray(a);
+        };
         this.call = function (callback, closure, args) {
             if (this.isFn(callback)) return callback.apply(closure || this, args || []);
         };
