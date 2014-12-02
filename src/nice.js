@@ -7,6 +7,9 @@
  *
  * Licensed under MIT license:
  *      http://www.opensource.org/licenses/mit-license.php
+ *
+ * Documentation:
+ *      https://github.com/mesour/jQuery.nice#jquerynice
  */
 (function ($) {
     var Nice = function () {
