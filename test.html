@@ -8,28 +8,31 @@
 </head>
 <body>
 
+<div class="test-selector">bla bla bla</div>
+
 <script src="src/nice.js"></script>
 
 <script>
     (function ($) {
-        var NICE_PLUGIN = 'MyPlugin';
+        var NICE_PLUGIN = 'SayHello';
 
         if (!$.nice.createPlugin) {
             throw new Error('jQuery.nice.' + NICE_PLUGIN + ' require jQuery.nice core.');
         }
 
         var plugin = $.nice.createPlugin(NICE_PLUGIN, '0.1.0');
-        plugin.options = {
-            // default options
+        plugin.options = { // default options
+
+            textHello: 'Hello!'
+
         };
 
-        $.fn.myPlugin = function () {
-            return $.nice.init(this, plugin, MyPlugin, arguments);
+        $.fn.sayHello = function () {
+            return $.nice.init(this, plugin, SayHello, arguments);
         };
 
-        var MyPlugin = function (element, options) {
-            console.log(element, options);
-            // applied for all matches elements
+        var SayHello = function (element, options) {
+            element.text(options.textHello);
         };
     })(jQuery);
 </script>
