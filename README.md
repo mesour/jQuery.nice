@@ -46,3 +46,51 @@ $('.test-selector').sayHello({
 // "SayHello" is your nice plugin name
 $.nice.getPlugin('SayHello').options.textHello = 'Hallo :)';
 ```
+
+# Events
+How to create and call events.
+1. Add beforeChange asd afterChange to default options as names of your events.
+2. In your function add $.nice.call
+
+```javascript
+(function ($) {
+        //...
+        var plugin = $.nice.createPlugin(NICE_PLUGIN, '0.1.0');
+        plugin.options = { // default options
+
+            textHello: 'Hello!',
+            
+            beforeChange: null,
+            
+            afterChange: null
+
+        };
+
+        $.fn.sayHello = function () {
+            return $.nice.init(this, plugin, SayHello, arguments);
+        };
+
+        var SayHello = function (element, options) {
+            $.nice.call(options.beforeChange); //call before callback
+            
+            element.text(options.textHello);
+            
+            $.nice.call(options.afterChange); //call after callback
+        };
+})(jQuery);
+```
+
+Using:
+```javascript
+// replace text on all .test-selector to "My Hallo!"
+// and apply callbacks
+$('.test-selector').sayHello({
+	textHello: "My Hallo!",
+	beforeChange: function(){
+	    alert('before');
+	},
+	afterChange: function(){
+	    alert('after');
+	}
+});
+```
