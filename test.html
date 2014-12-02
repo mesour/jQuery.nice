@@ -23,7 +23,13 @@
         var plugin = $.nice.createPlugin(NICE_PLUGIN, '0.1.0');
         plugin.options = { // default options
 
-            textHello: 'Hello!'
+            textHello: 'Hello!',
+
+            beforeChange: null,
+
+            afterChange: null,
+
+            change: null
 
         };
 
@@ -32,7 +38,23 @@
         };
 
         var SayHello = function (element, options) {
+            var old_text = element.text();
+
+            $.nice.call(options.beforeChange); //call before callback
+
             element.text(options.textHello);
+            $.nice.call(options.change); //call change callback
+
+            $.nice.call(options.afterChange); //call after callback
+
+            this.changeTo = function(value){
+                element.text(value);
+                $.nice.call(options.change); //call change callback
+            };
+            this.revert = function(){
+                element.text(old_text);
+                $.nice.call(options.change); //call change callback
+            };
         };
     })(jQuery);
 </script>

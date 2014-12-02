@@ -91,11 +91,10 @@
 
                 if (!valid) return;
 
-                if (!$this.data(plugin.getDataName())) {
-                    if (!is_init) return;
+                if (!$this.data(plugin.getDataName()) && is_init) {
                     _this.call(create, $this);
                     $this.data(plugin.getDataName(), new object($this, options));
-                } else {
+                } else if(!is_init) {
                     if ($this.data(plugin.getDataName())[options]) {
                         $this.data(plugin.getDataName())[options]
                             .apply($this.data(plugin.getDataName()), parameters);

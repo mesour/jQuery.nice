@@ -48,9 +48,11 @@ $.nice.getPlugin('SayHello').options.textHello = 'Hallo :)';
 ```
 
 # Events
+
 How to create and call events.
-1. Add beforeChange asd afterChange to default options as names of your events.
-2. In your function add $.nice.call
+
+1) Add beforeChange asd afterChange to default options as names of your events.
+2) In your function add $.nice.call
 
 ```javascript
 (function ($) {
