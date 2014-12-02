@@ -102,7 +102,8 @@ $('.test-selector').sayHello({
 How to create and call methods.
 
 1. Add method to your core function
-2. In your function add $.nice.call
+2. This methods will be accessed
+3. You can use more arguments
 
 ```javascript
 (function ($) {
