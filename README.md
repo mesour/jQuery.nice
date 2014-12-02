@@ -51,8 +51,8 @@ $.nice.getPlugin('SayHello').options.textHello = 'Hallo :)';
 
 How to create and call events.
 
-1) Add beforeChange asd afterChange to default options as names of your events.
-2) In your function add $.nice.call
+1. Add beforeChange asd afterChange to default options as names of your events.
+2. In your function add $.nice.call
 
 ```javascript
 (function ($) {
@@ -95,4 +95,55 @@ $('.test-selector').sayHello({
 	    alert('after');
 	}
 });
+```
+
+# Methods
+
+How to create and call methods.
+
+1. Add method to your core function
+2. In your function add $.nice.call
+
+```javascript
+(function ($) {
+        //...
+
+        var SayHello = function (element, options) {
+            var old_text = element.text();
+        
+            $.nice.call(options.beforeChange); //call before callback
+            
+            element.text(options.textHello);
+            $.nice.call(options.change); //call change callback
+            
+            $.nice.call(options.afterChange); //call after callback
+            
+            this.changeTo = function(value){
+                element.text(value);
+                $.nice.call(options.change); //call change callback
+            };
+            this.revert = function(){
+                element.text(old_text);
+                $.nice.call(options.change); //call change callback
+            };
+        };
+})(jQuery);
+```
+
+Using:
+```javascript
+// replace text on all .test-selector to "My Hallo!"
+// and apply callbacks
+$('.test-selector').sayHello({
+	textHello: "My Hallo!",
+	change: function(){
+	    alert('change');
+	}
+});
+
+// for revert use
+$('.test-selector').sayHello('revert')
+
+// for apply your value
+$('.test-selector').sayHello('changeTo', 'Hehe!');
 ```
